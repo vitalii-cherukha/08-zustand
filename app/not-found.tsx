@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import css from '../components/Home/Home.module.css';
+import { Metadata } from 'next';
 
 export default function NotFound() {
   return (
@@ -12,3 +13,21 @@ export default function NotFound() {
     </div>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Not found 404',
+  description: 'Notes not found',
+  openGraph: {
+    title: 'Not found 404',
+    description: 'Notes not found',
+    url: 'https://08-zustand-ten-indol.vercel.app/not-found',
+    images: [
+      {
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Manage personal notes',
+      },
+    ],
+  },
+};
