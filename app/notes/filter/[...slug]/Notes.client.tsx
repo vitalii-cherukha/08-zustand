@@ -7,9 +7,8 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { fetchNotes } from '@/lib/api';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
-import NoteForm from '@/components/NoteForm/NoteForm';
-import Modal from '@/components/Modal/Modal';
 import { useDebouncedCallback } from 'use-debounce';
+import Link from 'next/link';
 
 interface NotesProps {
   tag: string;
@@ -18,8 +17,6 @@ interface NotesProps {
 const Notes = ({ tag }: NotesProps) => {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
-
   const { data, isSuccess } = useQuery({
     queryKey: ['notes', query, page, tag],
     queryFn: () => fetchNotes(query, page, tag),
@@ -43,16 +40,11 @@ const Notes = ({ tag }: NotesProps) => {
             currentPage={setPage}
           />
         )}
-        <button onClick={() => setIsOpen(true)} className={css.button}>
+        <Link href={'/notes/action/create/'} className={css.button}>
           Create note +
-        </button>
+        </Link>
       </header>
       {data && data.notes.length > 0 && <NoteList notes={data.notes} />}
-      {isOpen && (
-        <Modal onClose={() => setIsOpen(false)}>
-          <NoteForm onClose={() => setIsOpen(false)} />
-        </Modal>
-      )}
     </div>
   );
 };
