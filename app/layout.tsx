@@ -8,6 +8,8 @@ import Footer from '@/components/Footer/Footer';
 const roboto = Roboto({
   variable: '--font-roboto',
   subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '700'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
